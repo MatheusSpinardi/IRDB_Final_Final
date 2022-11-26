@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Resenhar Filme {{ restaurant.name }} </h2>
+
+<form action="{% url 'restaurants:resenha' restaurant.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Postar Resenha</button>
+</form>
+
+<p><a href="{% url 'restaurants:detail' restaurant.id %}">Voltar para a página do filme</a></p>
+{% endblock content %}

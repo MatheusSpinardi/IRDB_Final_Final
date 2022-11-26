@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Todos os Filmes</h2>
+<section>
+    <p>Muitos resultados? <a href="{% url 'restaurants:search' %}">Buscar Filmes</a></p>
+    <p>Não encontrou o filme? <a href="{% url 'restaurants:create' %}">Adicionar Novo Filme</a></p>
+</section>
+{% if restaurant_list %}
+<section class="lista-de-cards">
+    {% for restaurant in restaurant_list %}
+    <article class="card">
+        <a href="{% url 'restaurants:detail' restaurant.id %}"><img src="{{ restaurant.poster_url }}"
+            alt="Poster do filme {{ restaurant.name}}"></a>
+        <p>{{ restaurant.name }} </p>
+    </article>
+    {% endfor %}
+</section>
+{% else %}
+<p>Não foi encontrado nenhum filme.</p>
+{% endif %}
+
+{% endblock content %}
