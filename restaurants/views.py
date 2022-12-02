@@ -86,12 +86,12 @@ def create_resenha(request, restaurant_id):
             resenha_text = form.cleaned_data['text']
             resenha = Resenha(author=resenha_author,
                             text=resenha_text,
-                            movie=restaurant)
+                            restaurant=restaurant)
             resenha.save()
             return HttpResponseRedirect(
                 reverse('restaurants:detail', args=(restaurant_id, )))
     else:
         form = ResenhaForm()
     context = {'form': form, 'restaurant': restaurant}
-    return render(request, 'restaurants/review.html', context)
+    return render(request, 'restaurants/resenha.html', context)
 
