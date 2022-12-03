@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Criar Restaurante
+{% endblock title %}
+
+{% block content %}
+<a href="{% url 'signup' %}">Na verdade vc é um cliente?</a></p>
+<h2>Criar Restaurante</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Criar</button>
+</form>
+
+{% endblock content %} 
