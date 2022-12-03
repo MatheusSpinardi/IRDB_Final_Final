@@ -1,0 +1,154 @@
+.rate > input{
+    display: none;
+  }
+  
+  .rate{
+    display: inline-block;;
+    border: 0;
+  }
+  
+  .rate > label{
+    float: right;
+  }
+  
+  /* Showing the stars */
+  .rate > label:before{
+    display: inline-block;
+    font-size: 1.1rem;
+    font-family: FontAwesome;
+    content: "\f005";
+    margin:0;
+    padding:0.3rem .2rem;
+    cursor: pointer;
+  }
+  
+  /* Half star */
+  .rate .half:before{
+    content: "\f089";
+    position: absolute;
+    padding-right: 0;
+  }
+  
+  /* Click and hover */
+  input:checked ~ label, label:hover ~ label{
+    color: #ffb503;
+  }
+  
+  /* hover hightlight */
+  input:checked + label:hover, input:checked ~ label:hover,input:checked ~ label:hover ~ label,
+  label:hover ~ input:checked ~ label{
+    color: #cc9000;
+  }
+  
+  .rating-star i{
+    color: #ffb503 !important;
+  }
+  
+  ul.thumb{
+    margin:0 auto;
+    padding: 0;
+    float: left;
+  }
+  ul.thumb li{
+    list-style: none;
+    margin: 10px;
+  }
+  ul.thumb li img{
+    width: 80px;
+    height: 80px;
+    border: 1px solid grey;
+  }
+   
+  .form-inline input[type=number] {
+    max-width: 100px;
+  }
+  
+  .input-spinner {
+    width: 125px;
+    flex-wrap: nowrap;
+    display: inline-flex;
+    vertical-align: middle;
+  }
+  .input-spinner input.form-control {
+    text-align: center;
+    max-width: 46px;
+    font-weight: bold;
+    flex-basis: 46px;
+    border-color: #e4e4e4;
+    flex-grow: 0;
+  }
+  .input-spinner .btn {
+    width: 42px;
+    text-align: center;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  .checkbox-btn {
+    position: relative;
+  }
+  .checkbox-btn input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+  .checkbox-btn input:checked ~ .btn {
+    border-color: #3167eb;
+    background-color: #3167eb;
+    color: #fff;
+  }
+  
+  .btn-check {
+    position: relative;
+    display: inline-block;
+    border: 2px solid #dee2e6;
+    transition: 0s !important;
+  }
+  .btn-check input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+  .btn-check input:checked ~ .btn {
+    border-color: #3167eb;
+    background-color: #3167eb;
+    color: #fff;
+  }
+  .btn-check:hover:not(.active) {
+    border-color: #bbb;
+  }
+  
+  .js-check {
+    position: relative;
+  }
+  .js-check .title {
+    margin-left: 22px;
+  }
+  .js-check input {
+    position: absolute;
+    top: 21px;
+    left: 18px;
+  }
+  .js-check.active {
+    border-color: #3167eb;
+  }
+  .js-check:hover:not(.active) {
+    border-color: #ccc;
+  }
+  
+  .js-check.box {
+    width: 100%;
+    border-width: 3px;
+  }
+  
+  .card-header .form-check {
+    margin-bottom: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  
+  /* ================== PAGES =================== */
+  /* ================ PAGES HEADER ================== */
+  .section-pagetop {
+    padding: 45px 0;
+  }

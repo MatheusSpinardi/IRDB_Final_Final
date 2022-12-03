@@ -18,8 +18,9 @@ class ResenhaForm(ModelForm):
     class Meta:
         model = Resenha
         fields = [
-            'author',
+            
             'text',
+            'rating',
         ]
         labels = {
             'author': 'Usuário',

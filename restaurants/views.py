@@ -1,19 +1,23 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required, permission_required
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .models import Restaurant
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from .models import Restaurant, Resenha
 from .forms import RestaurantForm, ResenhaForm
+from django.contrib import messages
 
-def detail_restaurant(request, restaurant_id):
+
+def detail_restaurant(request: HttpRequest, restaurant_id) -> HttpResponse:
     restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
+    
+
     context = {'restaurant': restaurant}
     return render(request, 'restaurants/detail.html', context)
+
 
 def meu_restaurant(request,user_id):
     context= {}
@@ -56,7 +60,7 @@ def create_restaurant(request):
                           author_id=restaurant_author_id)
             restaurant.save()
             return HttpResponseRedirect(
-                reverse('restaurants:detail', args=(restaurant.id, )))
+                reverse('restaurants:detail', args=(restaurant.id )))
     else:
         form = RestaurantForm()
     context = {'form': form}
@@ -101,11 +105,13 @@ def create_resenha(request, restaurant_id):
     if request.method == 'POST':
         form = ResenhaForm(request.POST)
         if form.is_valid():
-            resenha_author = form.cleaned_data['author']
+            resenha_author = request.user
             resenha_text = form.cleaned_data['text']
+            resenha_rating = form.cleaned_data['rating']
             resenha = Resenha(author=resenha_author,
                             text=resenha_text,
-                            restaurant=restaurant)
+                            restaurant=restaurant,
+                            rating=resenha_rating)
             resenha.save()
             return HttpResponseRedirect(
                 reverse('restaurants:detail', args=(restaurant_id, )))
@@ -114,3 +120,27 @@ def create_resenha(request, restaurant_id):
     context = {'form': form, 'restaurant': restaurant}
     return render(request, 'restaurants/resenha.html', context)
 
+
+# @login_required
+# @permission_required('restaurants.add_resenha')
+# def submit_resenha(request, restaurant_id):
+#     url = request.META.get('HTTP_REFERER')
+#     if request.method == 'POST':
+#         try:
+#             resenhas = Resenha.objects.get(author__id=request.user.id, restaurant__id=restaurant_id)
+#             form = ResenhaForm(request.POST, instance=resenhas)
+#             form.save()
+#             messages.success(request, 'Thank you! Your review has been updated.')
+#             return redirect(url)
+#         except Resenha.DoesNotExist:
+#             form = ResenhaForm(request.POST)
+#             if form.is_valid():
+#                 data = Resenha()
+#                 data.rating = form.cleaned_data['rating']
+#                 data.text = form.cleaned_data['text']
+                
+#                 data.restaurant_id = restaurant_id
+#                 data.author_id = request.user.id
+#                 data.save()
+#                 messages.success(request, 'Thank you! Your review has been submitted.')
+#                 return redirect(url)
