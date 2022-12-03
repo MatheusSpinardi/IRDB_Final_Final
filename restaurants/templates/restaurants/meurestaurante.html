@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ restaurant.name }} 
+{% endblock title %}
+
+{% block content %}
+<h2>Detalhes do Filme {{ restaurant.name }}</h2>
+
+<section class="dados-de-filme">
+    <img src="{{ restaurant.poster_url }}" alt="Poster do filme {{ restaurant.name}}">
+    <ul>
+        <li>Nome: {{ restaurant.name }}</li>
+        <li><a href="{% url 'restaurants:update' restaurant.id %}">Editar</a></li>
+        <li><a href="{% url 'restaurants:delete' restaurant.id %}">Apagar</a></li>
+    </ul>
+</section>
+
+<hr>
+
+<section>
+    <header>
+        <h3>Resenhas</h3>
+    </header>
+    <ul>
+        {% if restaurant.resenha_set.all %}
+            {% for resenha in restaurant.resenha_set.all %}
+                <figure>
+                    <blockquote>
+                        "{{ resenha.text }}"
+                    </blockquote>
+                    <figcaption>—{{ resenha.author }}
+                </figure>
+            {% endfor %}
+        {% else %}
+            <p>Ainda não existe nenhuma resenha para este filme.</p>
+        {% endif %}
+    </ul>
+    
+    <hr>
+
+    <a href="{% url 'restaurants:resenha' restaurant.pk %}"><button>Crie sua Resenha</button></a>
+</section>
+
+{% endblock content %}
+
