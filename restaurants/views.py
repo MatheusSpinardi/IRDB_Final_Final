@@ -16,8 +16,11 @@ def detail_restaurant(request, restaurant_id):
     return render(request, 'restaurants/detail.html', context)
 
 def meu_restaurant(request,user_id):
-    restaurant = get_object_or_404(Restaurant, author_id=user_id)
-    context = {'restaurant': restaurant}
+    context= {}
+    search_list = Restaurant.objects.filter(author_id=user_id)
+    if len(search_list) == 1:
+        restaurant = get_object_or_404(Restaurant, author_id=user_id)
+        context = {'restaurant': restaurant}
     return render(request, 'restaurants/meurestaurante.html', context)
 
     

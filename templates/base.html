@@ -26,8 +26,10 @@
                     <li><a href="{% url 'login' %}">Log in</a></li>
                 {% endif %}
                 <li><a href="{% url 'restaurants:search' %}">Buscar Filmes</a></li>
+                {% if perms.restaurants.add_restaurant %}
                 <li><a href="{% url 'restaurants:meurestaurante' user.id %}">Meu</a></li>
-                <li><a href="{% url 'restaurants:index' %}">Restaurantes</a></li> adicione esta linha -->
+                {% endif %}
+                <!-- <li><a href="{% url 'restaurants:index' %}">Restaurantes</a></li>  -->
                 <li><a href="{% url 'about' %}">Sobre</a></li>
             </ul>
         </nav>

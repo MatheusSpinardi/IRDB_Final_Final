@@ -5,14 +5,17 @@
 {% endblock title %}
 
 {% block content %}
+{% if restaurant %}
 <h2>Detalhes do Filme {{ restaurant.name }}</h2>
 
 <section class="dados-de-filme">
     <img src="{{ restaurant.poster_url }}" alt="Poster do filme {{ restaurant.name}}">
     <ul>
         <li>Nome: {{ restaurant.name }}</li>
+        {% if restaurant.author_id == user.id %}
         <li><a href="{% url 'restaurants:update' restaurant.id %}">Editar</a></li>
         <li><a href="{% url 'restaurants:delete' restaurant.id %}">Apagar</a></li>
+        {%endif%}
     </ul>
 </section>
 
@@ -36,11 +39,15 @@
             <p>Ainda não existe nenhuma resenha para este filme.</p>
         {% endif %}
     </ul>
-    
-    <hr>
 
-    <a href="{% url 'restaurants:resenha' restaurant.pk %}"><button>Crie sua Resenha</button></a>
+
 </section>
+{% else %}
+<h>Não tem Restaurante ainda?</h>
+<h>Bora criar?</h>
+<a href="{% url 'restaurants:create' %}">Criar restaurante</a></p>
+{% endif %}
+
 
 {% endblock content %}
 
