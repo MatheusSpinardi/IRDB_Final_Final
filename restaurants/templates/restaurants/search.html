@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Busca de Restaurantes por Nome</h2>
+<h2>Busca de Restaurantes por Nome ou Tipo de comida</h2>
 <form action="{% url 'restaurants:search' %}">
     <p>
         <label for="id_query">Nome:</label>
