@@ -46,8 +46,8 @@ def search_restaurants(request):
         context = {"restaurant_list":restaurant_list}
     return render(request, 'restaurants/search.html', context)
     
-#@login_required
-#@permission_required('restaurants.add_restaurant')
+@login_required
+@permission_required('restaurants.add_restaurant')
 def create_restaurant(request):
     if request.method == 'POST':
         form = RestaurantForm(request.POST)

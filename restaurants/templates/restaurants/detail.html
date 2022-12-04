@@ -13,7 +13,7 @@
     <ul>
         <li>Nome: {{ restaurant.name }}</li>
         
-        <li class="card-title">Avarage rating:
+        <li class="card-title">Nota média:
             {% if restaurant.average_rating > 0.5 %} 
             <i class="fa fa-star" aria-hidden="true" width = "500%"></i>
             {% endif %}
@@ -59,7 +59,7 @@
                     <blockquote>
                         "{{ resenha.text }}"
                     </blockquote>
-                    <figcaption>—{{ resenha.author }}, Nota: {{ resenha.rating }}, Data:{{resenha.data|date:"SHORT_DATE_FORMAT"}}
+                    <figcaption>—{{ resenha.author }},{{resenha.data|date:"SHORT_DATE_FORMAT"}}, Nota: {{ resenha.rating }}
                 </figure>
             {% endfor %}
         {% else %}

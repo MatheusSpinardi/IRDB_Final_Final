@@ -25,14 +25,16 @@
         <nav id="navegacao-principal">
             <ul>
                 {% if user.is_authenticated %}
-                    <li> Logado com {{ user.username }}({{ user.id }}) </li>
-                    <li><a href="{% url 'logout' %}">Log out</a></li>
+                <li> Logado com {{ user.username }}({{ user.id }}) </li>
+                <li><a href="{% url 'logout' %}">Log out</a></li>
                 {% else %}
-                    <li><a href="{% url 'login' %}">Log in</a></li>
-                {% endif %}
+                <li><a href="{% url 'login' %}">Log in</a></li>
+                {% endif %}</ul>
+            
+            <ul>
                 <li><a href="{% url 'restaurants:search' %}">Buscar</a></li>
                 {% if perms.restaurants.add_restaurant %}
-                <li><a href="{% url 'restaurants:meurestaurante' user.id %}">Meu</a></li>
+                <li><a href="{% url 'restaurants:meurestaurante' user.id %}">Meu Restaurante</a></li>
                 {% endif %}
                 <!-- <li><a href="{% url 'restaurants:index' %}">Restaurantes</a></li>  -->
                 <li><a href="{% url 'about' %}">Sobre</a></li>
