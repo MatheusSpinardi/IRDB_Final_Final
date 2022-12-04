@@ -182,7 +182,7 @@ def update_reserva(request, reserva_id):
 
             reserva.standby=1
             reserva.aprove= form.cleaned_data['aprove']
-            reserva.np = form.cleaned_data['np']
+            
 
             reserva.save()
             context = {'restaurant': restaurant}
@@ -191,7 +191,7 @@ def update_reserva(request, reserva_id):
         form = ReservaUpdateForm(
             initial={
                 'aprove':reserva.aprove,
-                'np':reserva.np
+                
             })
 
     context = {'reserva': reserva, 'form': form}
