@@ -41,13 +41,14 @@
         <!-- <li><a href="{% url 'restaurants:delete' restaurant.id %}">Apagar</a></li> -->
         <!-- {%endif%} -->
         <hr>
-        <li><textarea name="text" rows="8" class="form-control">{{ restaurant.text }}</textarea></li>
+        <li><textarea name="text" rows="8" class="form-control" disabled="True">{{ restaurant.text }}</textarea></li>
       
     </ul>
 </section>
 {% include 'includes/alerts.html'%}
 
 <hr>
+<a href="{% url 'restaurants:reserva' restaurant.pk %}"><button>Reserva</button></a>
 <a href="{% url 'restaurants:resenha' restaurant.pk %}"><button>Crie sua Resenha</button></a>
 <hr>
 <section>

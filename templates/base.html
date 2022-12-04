@@ -36,6 +36,9 @@
                 {% if perms.restaurants.add_restaurant %}
                 <li><a href="{% url 'restaurants:meurestaurante' user.id %}">Meu Restaurante</a></li>
                 {% endif %}
+                {% if perms.restaurants.add_reserva%}
+                <li><a href="{% url 'restaurants:minhasreservas' user.id %}">Minhas Reservas</a></li>
+                {% endif %}
                 <!-- <li><a href="{% url 'restaurants:index' %}">Restaurantes</a></li>  -->
                 <li><a href="{% url 'about' %}">Sobre</a></li>
             </ul>

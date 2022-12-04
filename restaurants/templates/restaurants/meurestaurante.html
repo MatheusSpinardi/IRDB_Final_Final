@@ -34,7 +34,7 @@
         <li>Endereço: {{ restaurant.endereco }}</li>
         <li>Tipo de comida: {{ restaurant.comida }}</li>
         <li>Faixa de preço: {{ restaurant.preco }}</li>
-        <li><textarea name="text" rows="8" class="form-control">{{ restaurant.text }}</textarea></li>
+        <li><textarea name="text" rows="8" class="form-control" disabled="True">{{ restaurant.text }}</textarea></li>
         {% if restaurant.author_id == user.id %}
         <li><a href="{% url 'restaurants:update' restaurant.id %}">Editar</a></li>
         <li><a href="{% url 'restaurants:delete' restaurant.id %}">Apagar</a></li>
@@ -43,7 +43,8 @@
 </section>
 
 <hr>
-
+<a href="{% url 'restaurants:reserva' restaurant.pk %}"><button>Reserva</button></a>
+<hr>
 <section>
     <header>
         <h3>Resenhas</h3>
@@ -55,7 +56,7 @@
                     <blockquote>
                         "{{ resenha.text }}"
                     </blockquote>
-                    <figcaption>—{{ resenha.author }}
+                    <figcaption>—{{ resenha.author }}, Nota:{{ resenha.rating}}, {{ resenha.data }}
                 </figure>
             {% endfor %}
         {% else %}

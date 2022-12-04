@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'staticpages.apps.StaticpagesConfig', # adicione esta linha
     'restaurants.apps.RestaurantsConfig', # adicione esta linha
     'accounts.apps.AccountsConfig',
+    'cpf_field',
 ]
 
 

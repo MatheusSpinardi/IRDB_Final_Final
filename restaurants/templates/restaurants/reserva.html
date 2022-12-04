@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ restaurant.name }} 
+{% endblock title %}
+
+{% block content %}
+
+<section>
+    <header>
+        <h3>Reservas</h3>
+        {% if user.id == restaurant.author_id %}
+                <h3>Suas Reservas não vistas</h3>
+        {% endif %}
+    </header>
+    {% if perms.restaurants.add_reserva %}
+    <a href="{% url 'restaurants:reservacreate' restaurant.pk %}"><button>Fazer sua Reserva</button></a>
+    {% endif %}
+    <ul>
+        {% if restaurant.reserva_set.all %}
+            {% for reserva in restaurant.reserva_set.all|dictsortreversed:"data_up" %}
+                {% if user.id == reserva.cliente.id %}
+                    {% if reserva.standby %}
+                        {% if reserva.aprove %}
+                        <hr>
+                            <figure class="aprovada">
+                                <h5>Sua reserva foi aprovada!</h5>
+                                <blockquote>
+                                    {{ reserva.np }} &nbsp Pessoas &nbsp {{reserva.reserva|date:"SHORT_DATE_FORMAT"}}
+                                </blockquote>
+                                <figcaption>—{{ reserva.cliente }},Data de upload: {{ reserva.data_up }}
+                            </figure>
+                        {% else %} 
+                            <hr>
+                            <figure class="desaprovada">
+                                <h5>Infelizmente sua reserva não foi aprovada</h5>
+                                <blockquote>
+                                    {{ reserva.np }} &nbsp Pessoas &nbsp {{reserva.reserva|date:"SHORT_DATE_FORMAT"}}
+                                </blockquote>
+                                <figcaption>—{{ reserva.cliente }},Data de upload: {{ reserva.data_up }}
+                            </figure>
+                        {% endif %}
+
+                    {% else %} 
+                    <hr>
+                    <figure class="nvista">
+                        <h5>Aguarde, sua reserva não foi vista ainda</h5>
+                        <blockquote>
+                            {{ reserva.np }} &nbsp Pessoas &nbsp {{reserva.reserva|date:"SHORT_DATE_FORMAT"}}
+                        </blockquote>
+                        <figcaption>—{{ reserva.cliente }},Data de upload: {{ reserva.data_up }}
+                    </figure>
+                    {% endif %}
+                {% endif %}
+                {% if user.id == restaurant.author_id %}
+                
+                    {% if reserva.standby == False %}
+                        <hr>
+                        <figure>
+                            <blockquote>
+                                {{ reserva.np }} &nbsp Pessoas &nbsp {{reserva.reserva|date:"SHORT_DATE_FORMAT"}}
+                            </blockquote>
+                            <figcaption>—{{ reserva.cliente }},Data de upload: {{ reserva.data_up }}
+                                <a href="{% url 'restaurants:reservaup' reserva.pk %}"><button>Editar</button></a>
+                        </figure>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <p>Ainda não existe nenhuma reserva para este restaurante.</p>
+        {% endif %}
+    </ul>
+    
+
+</section>
+<p><a href="{% url 'restaurants:detail' restaurant.id %}">Voltar para a página do restaurante</a></p>
+{% endblock content %}

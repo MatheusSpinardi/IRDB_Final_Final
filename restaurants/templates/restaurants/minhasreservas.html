@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ user.first_name }} {{ user.last_name }} 
+{% endblock title %}
+
+{% block content %}
+
+<h1>Minhas Reservas</h1>
+{% for reserva in reserva_list %}
+    <section>
+
+        {% if reserva.standby %}
+            {% if reserva.aprove %}
+            <hr>
+                <figure class="aprovada">
+                    <h5>Sua reserva foi aprovada!</h5>
+                    <blockquote>
+                        {{ reserva.np }} &nbsp Pessoas &nbsp {{reserva.reserva|date:"SHORT_DATE_FORMAT"}}
+                    </blockquote>
+                    <figcaption>—{{ reserva.cliente }},Data de upload: {{ reserva.data_up }}
+                </figure>
+            {% else %} 
+                <hr>
+                <figure class="desaprovada">
+                    <h5>Infelizmente sua reserva não foi aprovada</h5>
+                    <blockquote>
+                        {{ reserva.np }} &nbsp Pessoas &nbsp {{reserva.reserva|date:"SHORT_DATE_FORMAT"}}
+                    </blockquote>
+                    <figcaption>—{{ reserva.cliente }},Data de upload: {{ reserva.data_up }}
+                </figure>
+            {% endif %}
+
+        {% else %} 
+            <hr>
+            <figure class="nvista">
+                <h5>Aguarde, sua reserva não foi vista ainda</h5>
+                <blockquote>
+                    {{ reserva.np }} &nbsp Pessoas &nbsp {{reserva.reserva|date:"SHORT_DATE_FORMAT"}}
+                </blockquote>
+                <figcaption>—{{ reserva.cliente }},Data de upload: {{ reserva.data_up }}
+            </figure>
+        {% endif %}
+
+    </section>
+{% endfor %}
+{% endblock content %}

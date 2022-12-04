@@ -475,7 +475,7 @@
   
   textarea {
     overflow: auto;
-    resize: vertical;
+    resize: none;
   }
   
   fieldset {
@@ -2054,9 +2054,38 @@
   .table-responsive > .table-bordered {
     border: 0;
   }
+  .aprovada {
+    padding-left: 30px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border: 10px solid var(--green);
+    border-radius: 5px;
+    
+  }
+
+  .desaprovada {
+    padding-left: 30px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border: 10px solid var(--red);
+    border-radius: 5px;
+    
+  }
+
+  .nvista {
+    padding-left: 30px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border: 10px solid var(--gray);
+    border-radius: 5px;
+    
+  }
   
+
+
   .form-control {
     display: block;
+    resize: none;
     width: 100%;
     height: calc(1.5em + 0.9rem + 2px);
     padding: 0.45rem 0.85rem;

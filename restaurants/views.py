@@ -6,8 +6,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
-from .models import Restaurant, Resenha
-from .forms import RestaurantForm, ResenhaForm
+from .models import Restaurant, Resenha, Reserva
+from .forms import RestaurantForm, ResenhaForm, ReservaForm, ReservaUpdateForm
 from django.contrib import messages
 
 
@@ -140,7 +140,68 @@ def create_resenha(request, restaurant_id):
     context = {'form': form, 'restaurant': restaurant}
     return render(request, 'restaurants/resenha.html', context)
 
+def reserva_restaurant(request: HttpRequest, restaurant_id) -> HttpResponse:
+    restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
+    
 
+    context = {'restaurant': restaurant}
+    return render(request, 'restaurants/reserva.html', context)
+
+@login_required
+@permission_required('restaurants.add_reserva')
+def create_reserva(request, restaurant_id):
+    restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
+    if request.method == 'POST':
+        form = ReservaForm(request.POST)
+        if form.is_valid():
+            reserva_cliente = request.user
+            reserva_cpf = form.cleaned_data['cpf']
+            reserva_np = form.cleaned_data['np']
+            reserva_reserva = form.cleaned_data['reserva']
+            reserva = Reserva(cliente=reserva_cliente,
+                            cpf=reserva_cpf,
+                            restaurant=restaurant,
+                            np=reserva_np,
+                            reserva= reserva_reserva)
+            reserva.save()
+            return HttpResponseRedirect(
+                reverse('restaurants:reserva', args=(restaurant_id, )))
+    else:
+        form = ReservaForm()
+    context = {'form': form, 'restaurant': restaurant}
+    return render(request, 'restaurants/reservacreate.html', context)
+
+@login_required
+@permission_required('restaurants.change_reserva')
+def update_reserva(request, reserva_id):
+    reserva= get_object_or_404(Reserva, pk=reserva_id)
+    restaurant = get_object_or_404(Restaurant, pk=reserva.restaurant.id)
+    if request.method == "POST":
+        form = ReservaUpdateForm(request.POST)
+        if form.is_valid():
+
+            reserva.standby=1
+            reserva.aprove= form.cleaned_data['aprove']
+            reserva.np = form.cleaned_data['np']
+
+            reserva.save()
+            context = {'restaurant': restaurant}
+            return render(request, 'restaurants/reserva.html', context)
+    else:
+        form = ReservaUpdateForm(
+            initial={
+                'aprove':reserva.aprove,
+                'np':reserva.np
+            })
+
+    context = {'reserva': reserva, 'form': form}
+    return render(request, 'restaurants/reservaup.html', context)
+
+def minhas_reserva(request, user_id):
+    context= {}
+    reserva_list = Reserva.objects.filter(cliente_id=user_id)
+    context = {'reserva_list': reserva_list}
+    return render(request, 'restaurants/minhasreservas.html', context)
 # @login_required
 # @permission_required('restaurants.add_resenha')
 # def submit_resenha(request, restaurant_id):
