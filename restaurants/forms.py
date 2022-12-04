@@ -8,10 +8,18 @@ class RestaurantForm(ModelForm):
         fields = [
             'name',
             'poster_url',
+            'endereco',
+            'comida',
+            'preco',
+            'text',
         ]
         labels = {
             'name': 'Título',
             'poster_url': 'URL do Poster',
+            'endereco': 'Endereço',
+            'comida': 'Tipo de comida',
+            'preco': 'Faixa de preço',
+            'text': 'Descrição do lugar',
         }
 
 class ResenhaForm(ModelForm):

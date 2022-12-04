@@ -46,8 +46,8 @@ def search_restaurants(request):
         context = {"restaurant_list":restaurant_list}
     return render(request, 'restaurants/search.html', context)
     
-@login_required
-@permission_required('restaurants.add_restaurant')
+#@login_required
+#@permission_required('restaurants.add_restaurant')
 def create_restaurant(request):
     if request.method == 'POST':
         form = RestaurantForm(request.POST)
@@ -55,12 +55,21 @@ def create_restaurant(request):
             restaurant_name = form.cleaned_data['name']
             restaurant_author_id = request.user.id
             restaurant_poster_url = form.cleaned_data['poster_url']
+            restaurant_endereco = form.cleaned_data['endereco']
+            restaurant_comida = form.cleaned_data['comida']
+            restaurant_preco = form.cleaned_data['preco']
+            restaurant_text = form.cleaned_data['text']
             restaurant = Restaurant(name=restaurant_name,                        
                           poster_url=restaurant_poster_url,
-                          author_id=restaurant_author_id)
+                          author_id=restaurant_author_id,
+                          endereco=restaurant_endereco,
+                          comida=restaurant_comida,
+                          preco=restaurant_preco,
+                          text = restaurant_text)
             restaurant.save()
-            return HttpResponseRedirect(
-                reverse('restaurants:detail', args=(restaurant.id )))
+            context = {'restaurant': restaurant}
+            return render(request, 'restaurants/meurestaurante.html', context)
+
     else:
         form = RestaurantForm()
     context = {'form': form}
@@ -75,14 +84,22 @@ def update_restaurant(request, restaurant_id):
         if form.is_valid():
             restaurant.name = form.cleaned_data['name']
             restaurant.poster_url = form.cleaned_data['poster_url']
+            restaurant.endereco = form.cleaned_data['endereco']
+            restaurant.comida = form.cleaned_data['comida']
+            restaurant.preco = form.cleaned_data['preco']
+            restaurant.text = form.cleaned_data['text']
             restaurant.save()
-            return HttpResponseRedirect(
-                reverse('restaurants:detail', args=(restaurant.id, )))
+            context = {'restaurant': restaurant}
+            return render(request, 'restaurants/meurestaurante.html', context)
     else:
         form = RestaurantForm(
             initial={
                 'name': restaurant.name,
-                'poster_url': restaurant.poster_url
+                'poster_url': restaurant.poster_url,
+                'endereço':restaurant.endereco,
+                'comida':restaurant.comida,
+                'preco':restaurant.preco,
+                'text':restaurant.text
             })
 
     context = {'restaurant': restaurant, 'form': form}
@@ -93,7 +110,8 @@ def delete_restaurant(request, restaurant_id):
 
     if request.method == "POST":
         restaurant.delete()
-        return HttpResponseRedirect(reverse('restaurants:index'))
+        context={'restaurant': None}
+        return render(request, 'restaurants/meurestaurante.html', context)
 
     context = {'restaurant':restaurant}
     return render(request, 'restaurants/delete.html', context)

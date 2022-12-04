@@ -10,6 +10,11 @@ class Restaurant(models.Model):
     name = models.CharField(max_length=255)
     poster_url = models.URLField(max_length=200, null=True)
     author_id = models.IntegerField(default=0)
+    endereco = models.CharField(max_length=255, blank= True)
+    comida = models.CharField(max_length=255, blank= True)
+    preco = models.CharField(max_length=255, blank= True)
+    text = models.TextField(max_length=500, blank= True)
+
     
     def average_rating(self) -> float:
         return Resenha.objects.filter(restaurant=self).aggregate(Avg("rating"))["rating__avg"] or 0

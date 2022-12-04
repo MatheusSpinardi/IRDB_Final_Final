@@ -12,13 +12,35 @@
     <img src="{{ restaurant.poster_url }}" alt="Poster do filme {{ restaurant.name}}">
     <ul>
         <li>Nome: {{ restaurant.name }}</li>
-        <li>Avarage Rating: {{ restaurant.average_rating }}</li>
+        
+        <li class="card-title">Avarage rating:
+            {% if restaurant.average_rating > 0.5 %} 
+            <i class="fa fa-star" aria-hidden="true" width = "500%"></i>
+            {% endif %}
+            {% if restaurant.average_rating > 1.5 %} 
+            <i class="fa fa-star" aria-hidden="true"></i>
+            {% endif %}
+            {% if restaurant.average_rating > 2.5 %} 
+            <i class="fa fa-star" aria-hidden="true"></i>
+            {% endif %}
+            {% if restaurant.average_rating > 3.5 %} 
+            <i class="fa fa-star" aria-hidden="true"></i>
+            {% endif %}
+            {% if restaurant.average_rating > 4.5 %} 
+            <i class="fa fa-star" aria-hidden="true"></i>
+            {% endif %}
+            &nbsp
+            <i> {{ restaurant.average_rating }}<i> 
+        </li>
+        <li>Endereço: {{ restaurant.endereco }}</li>
+        <li>Tipo de comida: {{ restaurant.comida }}</li>
+        <li>Faixa de preço: {{ restaurant.preco }}</li>
         <!-- {% if restaurant.author_id == user.id %} -->
         <!-- <li><a href="{% url 'restaurants:update' restaurant.id %}">Editar</a></li> -->
         <!-- <li><a href="{% url 'restaurants:delete' restaurant.id %}">Apagar</a></li> -->
         <!-- {%endif%} -->
-
-        </li>
+        <li><textarea name="text" rows="4" class="form-control">{{ restaurant.text }}</textarea></li>
+        
     </ul>
 </section>
 {% include 'includes/alerts.html'%}
