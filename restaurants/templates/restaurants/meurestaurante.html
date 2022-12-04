@@ -12,7 +12,7 @@
     <img src="{{ restaurant.poster_url }}" alt="Poster do restaurante {{ restaurant.name}}">
     <ul>
         <li>Nome: {{ restaurant.name }}</li>
-        <li class="card-title">Avarage rating:
+        <li class="card-title2">Avarage rating:
             {% if restaurant.average_rating > 0.5 %} 
             <i class="fa fa-star" aria-hidden="true" width = "500%"></i>
             {% endif %}
@@ -29,12 +29,12 @@
             <i class="fa fa-star" aria-hidden="true"></i>
             {% endif %}
             &nbsp
-            <i> {{ restaurant.average_rating }}<i> 
+            <i> {{ restaurant.avr|floatformat:2 }}<i> 
         </li>
         <li>Endereço: {{ restaurant.endereco }}</li>
         <li>Tipo de comida: {{ restaurant.comida }}</li>
         <li>Faixa de preço: {{ restaurant.preco }}</li>
-        <li><textarea name="text" rows="4" class="form-control">{{ restaurant.text }}</textarea></li>
+        <li><textarea name="text" rows="8" class="form-control">{{ restaurant.text }}</textarea></li>
         {% if restaurant.author_id == user.id %}
         <li><a href="{% url 'restaurants:update' restaurant.id %}">Editar</a></li>
         <li><a href="{% url 'restaurants:delete' restaurant.id %}">Apagar</a></li>

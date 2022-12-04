@@ -131,6 +131,8 @@ def create_resenha(request, restaurant_id):
                             restaurant=restaurant,
                             rating=resenha_rating)
             resenha.save()
+            restaurant.avr= restaurant.average_rating()
+            restaurant.save()
             return HttpResponseRedirect(
                 reverse('restaurants:detail', args=(restaurant_id, )))
     else:

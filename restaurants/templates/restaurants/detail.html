@@ -13,7 +13,8 @@
     <ul>
         <li>Nome: {{ restaurant.name }}</li>
         
-        <li class="card-title">Nota média:
+        <li class="card-title2">
+            <i>Nota média:</i> 
             {% if restaurant.average_rating > 0.5 %} 
             <i class="fa fa-star" aria-hidden="true" width = "500%"></i>
             {% endif %}
@@ -29,9 +30,9 @@
             {% if restaurant.average_rating > 4.5 %} 
             <i class="fa fa-star" aria-hidden="true"></i>
             {% endif %}
-            &nbsp
-            <i> {{ restaurant.average_rating }}<i> 
+            <i> {{ restaurant.avr|floatformat:1}}<i> 
         </li>
+        <hr>
         <li>Endereço: {{ restaurant.endereco }}</li>
         <li>Tipo de comida: {{ restaurant.comida }}</li>
         <li>Faixa de preço: {{ restaurant.preco }}</li>
@@ -39,8 +40,9 @@
         <!-- <li><a href="{% url 'restaurants:update' restaurant.id %}">Editar</a></li> -->
         <!-- <li><a href="{% url 'restaurants:delete' restaurant.id %}">Apagar</a></li> -->
         <!-- {%endif%} -->
-        <li><textarea name="text" rows="4" class="form-control">{{ restaurant.text }}</textarea></li>
-        
+        <hr>
+        <li><textarea name="text" rows="8" class="form-control">{{ restaurant.text }}</textarea></li>
+      
     </ul>
 </section>
 {% include 'includes/alerts.html'%}
