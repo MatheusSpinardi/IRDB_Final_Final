@@ -14,8 +14,8 @@ class RestaurantForm(ModelForm):
             'text',
         ]
         labels = {
-            'name': 'Título',
-            'poster_url': 'URL do Poster',
+            'name': 'Nome do Restaurante',
+            'poster_url': 'URL do logo',
             'endereco': 'Endereço',
             'comida': 'Tipo de comida',
             'preco': 'Faixa de preço',

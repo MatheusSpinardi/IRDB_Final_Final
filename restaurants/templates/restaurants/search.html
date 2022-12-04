@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Busca de Filmes por Nome</h2>
+<h2>Busca de Restaurantes por Nome</h2>
 <form action="{% url 'restaurants:search' %}">
     <p>
-        <label for="id_query">Título:</label>
+        <label for="id_query">Nome:</label>
         <input type="text" name="query" id="id_query" />
     </p>
     <button type="submit">Buscar</button>
@@ -17,8 +17,9 @@
 <section class="lista-de-cards">
     {% for restaurant in search_list %}
     <article class="card">
-        <img src="{{ restaurant.poster_url }}" alt="Poster do filme {{ restaurant.name}}">
-        <p>{{ movie.name }}</p>
+        <a href="{% url 'restaurants:detail' restaurant.id %}"><img src="{{ restaurant.poster_url }}"
+            alt="Poster do restaurante {{ restaurant.name}}"></a>
+        <p>{{ restaurant.name }}</p>
     </article>
     {% endfor %}
 </section>
@@ -30,13 +31,13 @@
     {% for restaurant in restaurant_list %}
     <article class="card">
         <a href="{% url 'restaurants:detail' restaurant.id %}"><img src="{{ restaurant.poster_url }}"
-            alt="Poster do filme {{ restaurant.name}}"></a>
+            alt="Poster do restaurante {{ restaurant.name}}"></a>
         <p>{{ restaurant.name }} </p>
     </article>
     {% endfor %}
 </section>
 {% else %}
-<p>Não foi encontrado nenhum filme.</p>
+<p>Não foi encontrado nenhum restaurante com esse nome.</p>
 {% endif %}
 {% endif %}
 

@@ -3,8 +3,8 @@
 {% block content %}
 <h2>Todos os Filmes</h2>
 <section>
-    <p>Muitos resultados? <a href="{% url 'restaurants:search' %}">Buscar Filmes</a></p>
-    <p>Não encontrou o filme? <a href="{% url 'restaurants:create' %}">Adicionar Novo Filme</a></p>
+    <p>Muitos resultados? <a href="{% url 'restaurants:search' %}">Buscar Restaurantes</a></p>
+    <p>Não encontrou o filme? <a href="{% url 'restaurants:create' %}">Adicionar Novo Restaurante</a></p>
 </section>
 {% if restaurant_list %}
 <section class="lista-de-cards">
@@ -17,7 +17,7 @@
     {% endfor %}
 </section>
 {% else %}
-<p>Não foi encontrado nenhum filme.</p>
+<p>Não foi encontrado nenhum restaurante.</p>
 {% endif %}
 
 {% endblock content %}

@@ -4,7 +4,7 @@
 <form action="{% url 'restaurants:delete' restaurant.id %}" method="post">
     {% csrf_token %}
     <p>
-        Você tem certeza que deseja apagar o filme "{{ restaurant.name }}"?
+        Você tem certeza que deseja apagar o restaurante "{{ restaurant.name }}"?
     </p>
     <button type="submit">Apagar</button>
 </form>

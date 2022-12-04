@@ -6,10 +6,10 @@
 
 {% block content %}
 
-<h2>Detalhes do Filme {{ restaurant.name }}</h2>
+<h2>{{ restaurant.name }}</h2>
 
 <section class="dados-de-filme">
-    <img src="{{ restaurant.poster_url }}" alt="Poster do filme {{ restaurant.name}}">
+    <img src="{{ restaurant.poster_url }}" alt="Poster do restaurante {{ restaurant.name}}">
     <ul>
         <li>Nome: {{ restaurant.name }}</li>
         
@@ -63,7 +63,7 @@
                 </figure>
             {% endfor %}
         {% else %}
-            <p>Ainda não existe nenhuma resenha para este filme.</p>
+            <p>Ainda não existe nenhuma resenha para este restaurante.</p>
         {% endif %}
     </ul>
     

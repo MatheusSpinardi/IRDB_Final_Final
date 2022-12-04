@@ -6,12 +6,35 @@
 
 {% block content %}
 {% if restaurant %}
-<h2>Detalhes do Filme {{ restaurant.name }}</h2>
+<h2>{{ restaurant.name }}</h2>
 
 <section class="dados-de-filme">
-    <img src="{{ restaurant.poster_url }}" alt="Poster do filme {{ restaurant.name}}">
+    <img src="{{ restaurant.poster_url }}" alt="Poster do restaurante {{ restaurant.name}}">
     <ul>
         <li>Nome: {{ restaurant.name }}</li>
+        <li class="card-title">Avarage rating:
+            {% if restaurant.average_rating > 0.5 %} 
+            <i class="fa fa-star" aria-hidden="true" width = "500%"></i>
+            {% endif %}
+            {% if restaurant.average_rating > 1.5 %} 
+            <i class="fa fa-star" aria-hidden="true"></i>
+            {% endif %}
+            {% if restaurant.average_rating > 2.5 %} 
+            <i class="fa fa-star" aria-hidden="true"></i>
+            {% endif %}
+            {% if restaurant.average_rating > 3.5 %} 
+            <i class="fa fa-star" aria-hidden="true"></i>
+            {% endif %}
+            {% if restaurant.average_rating > 4.5 %} 
+            <i class="fa fa-star" aria-hidden="true"></i>
+            {% endif %}
+            &nbsp
+            <i> {{ restaurant.average_rating }}<i> 
+        </li>
+        <li>Endereço: {{ restaurant.endereco }}</li>
+        <li>Tipo de comida: {{ restaurant.comida }}</li>
+        <li>Faixa de preço: {{ restaurant.preco }}</li>
+        <li><textarea name="text" rows="4" class="form-control">{{ restaurant.text }}</textarea></li>
         {% if restaurant.author_id == user.id %}
         <li><a href="{% url 'restaurants:update' restaurant.id %}">Editar</a></li>
         <li><a href="{% url 'restaurants:delete' restaurant.id %}">Apagar</a></li>
@@ -36,7 +59,7 @@
                 </figure>
             {% endfor %}
         {% else %}
-            <p>Ainda não existe nenhuma resenha para este filme.</p>
+            <p>Ainda não existe nenhuma resenha para este restaurante.</p>
         {% endif %}
     </ul>
 
