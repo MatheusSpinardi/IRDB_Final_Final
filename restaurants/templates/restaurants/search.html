@@ -10,6 +10,15 @@
     <button type="submit">Buscar</button>
 </form>
 
+<form action="{% url 'restaurants:search' %}">
+    <p>
+        <label for="id_query">Tipo de comida:</label>
+        <input type="text" name="query2" id="id_query" />
+    </p>
+    <button type="submit">Buscar</button>
+</form>
+
+
 
 
 {% if search_list %}

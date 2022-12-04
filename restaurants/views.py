@@ -41,6 +41,11 @@ def search_restaurants(request):
         search_term = request.GET['query'].lower()
         search_list = Restaurant.objects.filter(name__icontains=search_term)
         context = {"search_list": search_list,}
+
+    if request.GET.get('query2', False):
+        search_term = request.GET['query2'].lower()
+        search_list = Restaurant.objects.filter(comida__icontains=search_term)
+        context = {"search_list": search_list,}
     else:
         restaurant_list = Restaurant.objects.all()
         context = {"restaurant_list":restaurant_list}
